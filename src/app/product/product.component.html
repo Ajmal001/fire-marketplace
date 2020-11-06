@@ -1,0 +1,23 @@
+<div class="product" *ngIf="product">
+    <h3>
+        {{ product.name }}
+    </h3>
+    <p>
+        {{ product.price | currency }}
+    </p>
+    <p>
+        {{ product.description }}
+    </p>
+    <p *ngIf="seller">
+        Sold by <a routerLink="/user/{{ seller.username }}">{{ seller.username }}</a>
+    </p>
+    <button mat-raised-button>
+        Purchase
+    </button>
+    <button
+        *ngIf="product && currentUser && seller && currentUser.username !== seller.username"
+        mat-stroked-button
+        routerLink="/message/{{ product.slug }}/{{ seller.username }}/{{ currentUser.username }}">
+        Message
+    </button>
+</div>

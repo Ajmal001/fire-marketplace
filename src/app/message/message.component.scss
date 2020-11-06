@@ -1,0 +1,31 @@
+.conversation {
+    padding: 17px;
+}
+
+.messages {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.message-container {
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    max-width: 80%;
+    padding: 10px;
+    width: 100%;
+
+    &.responder {
+        background: lightgrey;
+    }
+
+    &.me {
+        background: lightblue;
+        margin-left: auto;
+    }
+}
+
+.send {
+    margin-left: 10px;
+}

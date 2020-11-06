@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fire-marketplace": {
+      "hosting": {
+        "fire-marketplace": [
+          "fire-marketplace"
+        ]
+      }
+    }
+  }
+}

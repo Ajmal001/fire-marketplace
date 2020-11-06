@@ -1,0 +1,5 @@
+<button mat-raised-button *ngIf="!(fireauth.authState | async)" (click)="login()">Login</button>
+<span *ngIf="fireauth.authState | async; let authUser;">
+    <img [src]="authUser.photoURL" routerLink="/user/{{ authUser.email.split('@')[0] }}" *ngIf="authUser">
+    <button mat-button (click)="logout()">Logout</button>
+</span>

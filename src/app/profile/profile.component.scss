@@ -1,0 +1,16 @@
+h2 {
+    margin: 20px 0 0 18px;
+}
+
+.products {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    padding: 7px;
+}
+
+.product {
+    cursor: pointer;
+    margin: 10px;
+    width: calc(25% - 52px);
+}

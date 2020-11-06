@@ -1,0 +1,35 @@
+<div class="create-product">
+    <h4>Sell a product</h4>
+    <mat-form-field>
+        <mat-label>Product name</mat-label>
+        <input
+            matInput
+            [(ngModel)]="name"
+            type="text"
+            placeholder="Product name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Product description</mat-label>
+        <input
+            matInput
+            [(ngModel)]="description"
+            type="text"
+            placeholder="Product description">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Product price</mat-label>
+        <input
+            matInput
+            [(ngModel)]="price"
+            type="number"
+            placeholder="Product price"
+            step="0.01"
+            min="0"
+            max="10000">
+    </mat-form-field>
+    <button
+        mat-raised-button
+        (click)="createProduct()">
+        Submit
+    </button>
+</div>
