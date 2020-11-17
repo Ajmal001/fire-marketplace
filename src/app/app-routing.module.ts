@@ -4,6 +4,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { SellComponent } from './sell/sell.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MessagesComponent } from './messages/messages.component';
 import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'sell', component: SellComponent },
   { path: 'product/:slug', component: ProductComponent },
   { path: 'user/:username', component: ProfileComponent },
+  { path: 'messages', component: MessagesComponent },
   { path: 'message/:product/:seller/:buyer', component: MessageComponent },
 ];
 

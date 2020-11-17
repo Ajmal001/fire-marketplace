@@ -8,16 +8,16 @@
     <p>
         {{ product.description }}
     </p>
-    <p *ngIf="seller">
-        Sold by <a routerLink="/user/{{ seller.username }}">{{ seller.username }}</a>
+    <p>
+        Sold by <a routerLink="/user/{{ product.seller }}">{{ product.seller }}</a>
     </p>
     <button mat-raised-button>
         Purchase
     </button>
     <button
-        *ngIf="product && currentUser && seller && currentUser.username !== seller.username"
+        *ngIf="product && currentUser && currentUser.username !== product.seller"
         mat-stroked-button
-        routerLink="/message/{{ product.slug }}/{{ seller.username }}/{{ currentUser.username }}">
+        routerLink="/message/{{ product.slug }}/{{ product.seller }}/{{ currentUser.username }}">
         Message
     </button>
 </div>

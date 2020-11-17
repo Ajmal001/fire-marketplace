@@ -1,31 +1,59 @@
 .conversation {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 100px);
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 975px;
     padding: 17px;
 }
 
-.messages {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .message-container {
-    border-radius: 10px;
-    box-sizing: border-box;
     margin-bottom: 5px;
     margin-top: 5px;
-    max-width: 80%;
-    padding: 10px;
-    width: 100%;
+
+    .message-inner {
+        display: inline-block;
+    }
 
     &.responder {
-        background: lightgrey;
+        .message {
+            background: lightgrey;
+        }
     }
 
     &.me {
-        background: lightblue;
-        margin-left: auto;
+        text-align: right;
+
+        .message {
+            background: lightblue;
+            text-align: left;
+        }
+    }
+
+    .message {
+        border-radius: 10px;
+        box-sizing: border-box;
+        display: inline-block;
+        padding: 10px;
+    }
+
+    .timestamp {
+        color: grey;
+        font-size: .8rem;
     }
 }
 
-.send {
-    margin-left: 10px;
+.inputs {
+    display: flex;
+    padding-bottom: 10px;
+
+    .message-input {
+        width: 100%;
+    }
+
+    .send-button {
+        margin-left: 10px;
+        width: 200px;
+    }
 }

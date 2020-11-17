@@ -1,0 +1,15 @@
+.conversations {
+    box-sizing: border-box;
+    padding: 20px 17px;
+}
+
+.conversation {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .product {
+        width: 20%;
+    }
+}

@@ -11,7 +11,6 @@ import { AuthService } from '../auth.service';
 export class ProductComponent implements OnInit {
   product: any;
   slug: string;
-  seller: any;
   currentUser: any;
 
   constructor(
@@ -38,15 +37,7 @@ export class ProductComponent implements OnInit {
       .subscribe((product) => {
         if (product.length) {
           this.product = product[0];
-          this.fetchUser(this.product.sellerId);
         }
     });
   }
-
-  fetchUser(id: string): void {
-    this.firestore.collection('users').doc(id).valueChanges().subscribe((seller) => {
-      this.seller = seller;
-    });
-  }
-
 }

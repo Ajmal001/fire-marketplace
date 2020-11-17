@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
@@ -43,13 +42,10 @@ export class MessageComponent implements OnInit {
   }
 
   fetchConversation(): void {
-    console.log('this.product', this.product);
-    console.log('this.seller', this.seller);
-    console.log('this.buyer', this.buyer);
     this.firestore.collection('conversations', ref => ref
-      .where('product', '==', this.product.slug)
-      .where('sellerId', '==', this.seller.uid)
-      .where('buyerId', '==', this.buyer.uid))
+      .where('product.slug', '==', this.product.slug)
+      .where('seller', '==', this.seller.username)
+      .where('buyer', '==', this.buyer.username))
       .snapshotChanges()
       .subscribe((conversation) => {
         if (conversation.length) {
@@ -68,36 +64,14 @@ export class MessageComponent implements OnInit {
       .subscribe((product) => {
         if (product.length) {
           this.product = product[0];
-
-          if (this.currentUser) {
-            if (this.currentUser.username === this.buyer.username) {
-              this.buyer = this.currentUser;
-              this.fetchUser('seller');
-            } else {
-              this.seller = this.currentUser;
-              this.fetchUser('buyer');
-            }
-          }
+          this.fetchConversation();
         }
-    });
-  }
-
-  fetchUser(userRole: string): void {
-    console.log('userRole', this[userRole].username);
-    this.firestore
-      .collection('users', ref => ref.where('username', '==', this[userRole].username))
-      .snapshotChanges()
-      .subscribe((user) => {
-        this[userRole] = user[0].payload.doc.data();
-        this[userRole].uid = user[0].payload.doc.id;
-        console.log('this[userRole]', this[userRole]);
-        this.fetchConversation();
     });
   }
 
   sendMessage(): void {
     const message = {
-      user: this.currentUser.uid,
+      user: this.currentUser.username,
       message: this.newMessage,
       createdAt: new Date(),
     };
@@ -105,12 +79,18 @@ export class MessageComponent implements OnInit {
       this.firestore
         .collection('conversations')
         .add({
-          product: this.productSlug,
-          sellerId: this.seller.uid,
-          buyerId: this.buyer.uid,
+          product: {
+            name: this.product.name,
+            price: this.product.price,
+            sold: this.product.sold,
+            slug: this.product.slug,
+          },
+          seller: this.seller.username,
+          buyer: this.buyer.username,
           messages: [message]
         }).then((response) => {
           console.log('message sent', response);
+          this.noMessages = false;
         });
     } else {
       this.conversation.messages.push(message);

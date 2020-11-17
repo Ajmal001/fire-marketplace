@@ -9,6 +9,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,7 @@ import { SellComponent } from './sell/sell.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthComponent } from './auth/auth.component';
 import { MessageComponent } from './message/message.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { MessageComponent } from './message/message.component';
     SellComponent,
     ProfileComponent,
     AuthComponent,
-    MessageComponent
+    MessageComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { MessageComponent } from './message/message.component';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+    MatTabsModule,
     MatToolbarModule,
   ],
   providers: [],

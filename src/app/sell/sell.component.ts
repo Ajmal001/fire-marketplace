@@ -12,7 +12,7 @@ export class SellComponent implements OnInit {
   name: string;
   description: string;
   price: number;
-  user: any;
+  currentUser: any;
   productsCollectionRef: any;
   userProductsCollectionRef: any;
 
@@ -26,7 +26,7 @@ export class SellComponent implements OnInit {
     this.productsCollectionRef = this.firestore.collection('products');
     this.userProductsCollectionRef = this.firestore.collection('user-products');
     this.authService.user.subscribe((u) => {
-      this.user = u;
+      this.currentUser = u;
     });
   }
 
@@ -36,7 +36,7 @@ export class SellComponent implements OnInit {
       name: this.name,
       description: this.description,
       price: this.price,
-      sellerId: this.user.uid,
+      seller: this.currentUser.username,
       sold: false,
       createdAt: new Date(),
       updatedAt: new Date(),

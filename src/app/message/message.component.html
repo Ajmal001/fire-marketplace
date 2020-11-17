@@ -1,35 +1,41 @@
 <div class="conversation">
-    <div class="product" *ngIf="product">
-        {{ product.name }} - {{ product.price | currency }}
-    </div>
-    <p *ngIf="noMessages">Start the conversation</p>
-    <div *ngIf="!noMessages && conversation && currentUser" class="messages">
-        <div
-            *ngFor="let conversationMessage of conversation.messages"
-            class="message-container"
-            [ngClass]="{
-                'me': conversationMessage.user === currentUser.uid,
-                'responder': conversationMessage.user !== currentUser.uid
-            }">
-            <div class="user" *ngIf="buyer && seller">
-                <div *ngIf="conversationMessage.user === currentUser.uid">
-                    {{ currentUser.username }}
+    <div>
+        <div class="product" *ngIf="product">
+            {{ product.name }} - {{ product.price | currency }}
+        </div>
+        <p *ngIf="noMessages">Start the conversation</p>
+        <div *ngIf="!noMessages && conversation && currentUser" class="messages">
+            <div
+                *ngFor="let conversationMessage of conversation.messages"
+                class="message-container"
+                [ngClass]="{
+                    'me': conversationMessage.user === currentUser.username,
+                    'responder': conversationMessage.user !== currentUser.username
+                }">
+                <div class="message-inner">
+                    <div class="user" *ngIf="buyer && seller">
+                        <div *ngIf="conversationMessage.user === currentUser.username">
+                            {{ currentUser.username }}
+                        </div>
+                        <div *ngIf="conversationMessage.user !== currentUser.username">
+                            {{ currentUser.username === seller.username ? buyer.username : seller.username }}
+                        </div>
+                    </div>
+                    <div class="message">
+                        {{ conversationMessage.message }}
+                    </div>
+                    <div class="timestamp">
+                        {{ conversationMessage.createdAt.seconds * 1000 | date:'medium' }}
+                    </div>
                 </div>
-                <div *ngIf="conversationMessage.user !== currentUser.uid">
-                    {{ currentUser.uid === seller.uid ? buyer.username : seller.username }}
-                </div>
-            </div>
-            <div class="message">
-                {{ conversationMessage.message }}
-            </div>
-            <div class="timestamp">
-                {{ conversationMessage.createdAt.seconds * 1000 | date:'medium' }}
             </div>
         </div>
     </div>
-    <mat-form-field>
-        <mat-label>Write a message</mat-label>
-        <input matInput [(ngModel)]="newMessage" placeholder="Write a message">
-    </mat-form-field>
-    <button mat-raised-button class="send" (click)="sendMessage()">Send</button>
+    <div class="inputs">
+        <mat-form-field class="message-input">
+            <mat-label>Write a message</mat-label>
+            <input matInput [(ngModel)]="newMessage" placeholder="Write a message">
+        </mat-form-field>
+        <button mat-raised-button class="send-button" (click)="sendMessage()">Send</button>
+    </div>
 </div>

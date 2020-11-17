@@ -1,0 +1,40 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Sell Messages">
+        <div *ngIf="sellConversations" class="conversations">
+            <mat-card
+                *ngFor="let conversation of sellConversations"
+                routerLink="{{ getConversationRoute(conversation) }}"
+                class="conversation">
+                <div class="product">
+                    {{ conversation.product.name }}
+                </div>
+                <div *ngFor="let conversationMessage of conversation.messages | slice:0:1">
+                    <div>{{ conversationMessage.message }}</div>
+                    <div>{{ conversationMessage.createdAt.seconds * 1000 | date:'medium' }}</div>
+                </div>
+                <div class="responder">
+                    {{ getResponder(conversation) }}
+                </div>
+            </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Buy Messages">
+        <div *ngIf="buyConversations" class="conversations">
+            <mat-card
+                *ngFor="let conversation of buyConversations"
+                routerLink="{{ getConversationRoute(conversation) }}"
+                class="conversation">
+                <div class="product">
+                    {{ conversation.product.name }}
+                </div>
+                <div *ngFor="let conversationMessage of conversation.messages | slice:0:1">
+                    <div>{{ conversationMessage.message }}</div>
+                    <div>{{ conversationMessage.createdAt.seconds * 1000 | date:'medium' }}</div>
+                </div>
+                <div class="responder">
+                    {{ getResponder(conversation) }}
+                </div>
+            </mat-card>
+        </div>
+    </mat-tab>
+</mat-tab-group>

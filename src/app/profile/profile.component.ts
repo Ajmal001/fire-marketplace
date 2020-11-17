@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      console.log('params', params);
       this.username = params.username;
       this.fetchUser();
     });
@@ -27,20 +26,20 @@ export class ProfileComponent implements OnInit {
 
   fetchUser(): void {
     this.firestore.collection('users', ref => ref.where('username', '==', this.username))
-      .snapshotChanges()
+      .valueChanges()
       .subscribe((user) => {
-        console.log('payload', user[0].payload.doc.id);
         if (user.length) {
-          this.seller = user[0].payload.doc.data();
-          this.seller.id = user[0].payload.doc.id;
-          this.firestore.collection('products', ref => ref.where('sellerId', '==', this.seller.id))
-            .valueChanges()
-            .subscribe((products) => {
-              console.log('products', products);
-              this.products = products;
-            });
+          this.seller = user[0];
+          this.fetchProducts();
         }
     });
   }
 
+  fetchProducts(): void {
+    this.firestore.collection('products', ref => ref.where('seller', '==', this.seller.username))
+      .valueChanges()
+      .subscribe((products) => {
+        this.products = products;
+      });
+  }
 }
